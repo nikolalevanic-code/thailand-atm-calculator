@@ -20,17 +20,34 @@ const TITLE = "Stop Paying Insane Hidden Fees at Thai ATMs — See the Real Cost
 const DESCRIPTION =
   "Thai ATMs quietly stack 3 charges on every withdrawal. Use the free calculator to see exactly what your card will cost you — and how much you can save.";
 
+// Social framing is punchier than the SERP snippet: a shared link has no
+// ranking context, so the hook has to do all the work in the feed.
+const OG_TITLE = "Thai ATMs are quietly taking 7% of your cash";
+const OG_DESCRIPTION =
+  "Three fees, one screen you should always decline. Check what your card really costs before your next withdrawal in Thailand.";
+const OG_IMAGE = "https://www.thailand-atm-calculator.com/og-home.jpg";
+
 export const Route = createFileRoute("/")({
   loader: ({ context }) => context.queryClient.ensureQueryData(fxRatesQuery),
   head: () => ({
     meta: [
       { title: TITLE },
       { name: "description", content: DESCRIPTION },
-      { property: "og:title", content: TITLE },
-      { property: "og:description", content: DESCRIPTION },
+      { property: "og:title", content: OG_TITLE },
+      { property: "og:description", content: OG_DESCRIPTION },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://www.thailand-atm-calculator.com/" },
+      { property: "og:image", content: OG_IMAGE },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      {
+        property: "og:image:alt",
+        content: "Thailand ATM Fee Calculator — stop paying hidden ATM fees",
+      },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: OG_TITLE },
+      { name: "twitter:description", content: OG_DESCRIPTION },
+      { name: "twitter:image", content: OG_IMAGE },
     ],
     links: [{ rel: "canonical", href: "https://www.thailand-atm-calculator.com/" }],
   }),

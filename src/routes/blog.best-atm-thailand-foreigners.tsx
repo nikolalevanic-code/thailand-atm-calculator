@@ -133,6 +133,9 @@ export const Route = createFileRoute("/blog/best-atm-thailand-foreigners")({
       description:
         "Not every Thai ATM treats foreign cards the same. Compare fees, limits, and DCC traps to find the cheapest machine for your withdrawal.",
       slug: "best-atm-thailand-foreigners",
+      ogTitle: "Not every Thai ATM costs the same. Know before you insert your card.",
+      ogDescription:
+        "Fees, limits and the conversion screen to decline — a practical comparison for foreign cards.",
     }),
   component: BestAtmThailand,
 });

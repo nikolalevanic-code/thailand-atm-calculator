@@ -77,14 +77,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Thailand ATM Calculator" },
-      {
-        name: "description",
-        content: "Work out the real cost of withdrawing cash from a Thai ATM.",
-      },
+      // Title, description, og:type, twitter:card and og:image are set per route
+      // in each leaf head() so they are never duplicated or overridden here.
       { property: "og:site_name", content: "Thailand ATM Calculator" },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:locale", content: "en_US" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

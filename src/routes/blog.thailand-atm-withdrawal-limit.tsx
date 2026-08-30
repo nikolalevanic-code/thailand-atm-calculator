@@ -154,6 +154,9 @@ export const Route = createFileRoute("/blog/thailand-atm-withdrawal-limit")({
       description:
         "Thai ATMs charge a flat fee per transaction, so small withdrawals waste money. See the limits by bank and the cheapest way to get your cash.",
       slug: "thailand-atm-withdrawal-limit",
+      ogTitle: "Withdrawing ฿10,000 four times costs double. Here's why.",
+      ogDescription:
+        "Thai ATM fees are per transaction, not per baht. Know the per-bank limits before you touch the keypad.",
     }),
   component: ThailandAtmWithdrawalLimit,
 });

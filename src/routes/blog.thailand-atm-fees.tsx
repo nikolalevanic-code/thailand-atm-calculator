@@ -300,6 +300,10 @@ export const Route = createFileRoute("/blog/thailand-atm-fees")({
         "Thai ATMs hit foreign cards with 3 separate charges. Learn what they are, which ones you can avoid, and how much you can save on every withdrawal.",
       slug: "thailand-atm-fees",
       faqItems,
+      ogTitle: "Thai ATMs charge foreigners 3 times. Most people only notice one.",
+      ogDescription:
+        "The 250 THB machine fee is the cheap part. Here's the full stack — and the one screen that costs you 7%.",
+      ogImage: "https://www.thailand-atm-calculator.com/og-blog.jpg",
     }),
   component: ThailandAtmFees,
 });

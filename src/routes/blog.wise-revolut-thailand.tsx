@@ -144,6 +144,9 @@ export const Route = createFileRoute("/blog/wise-revolut-thailand")({
       description:
         "Wise and Revolut both claim to be cheap abroad, but one usually wins in Thailand. See the real fees, limits, and best use-case for 2026.",
       slug: "wise-revolut-thailand",
+      ogTitle: "Wise or Revolut in Thailand? One runs out of free withdrawals fast.",
+      ogDescription:
+        "Real ATM allowances, weekend markups and the combination most travellers should actually carry.",
     }),
   component: WiseRevolutThailand,
 });

@@ -1,7 +1,18 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import BlogLayout from "@/components/blog/BlogLayout";
+import BlogLayout, { buildArticleHead } from "@/components/blog/BlogLayout";
 import ArticleCalculatorCta from "@/components/blog/ArticleCalculatorCta";
+
+export const Route = createFileRoute("/blog/best-atm-thailand-foreigners")({
+  head: () =>
+    buildArticleHead({
+      title: "Best ATMs in Thailand for Foreigners (2026): Fees, Limits & DCC",
+      description:
+        "Compare Thai ATM fees, card-network costs, withdrawal limits, and DCC offers before taking out cash with a foreign card.",
+      slug: "best-atm-thailand-foreigners",
+    }),
+  component: BestAtmThailand,
+});
 
 function BestAtmThailand() {
   return (

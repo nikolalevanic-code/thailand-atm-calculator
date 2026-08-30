@@ -1,6 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import BlogLayout from "@/components/blog/BlogLayout";
+import BlogLayout, { buildArticleHead } from "@/components/blog/BlogLayout";
+
+export const Route = createFileRoute("/blog/thailand-atm-no-fee")({
+  head: () =>
+    buildArticleHead({
+      title: "How to Withdraw Money in Thailand Without Fees (2026): Best Cards & Strategy",
+      description:
+        "Wise, Revolut, and Schwab can eliminate your home bank’s charges entirely. Here’s the full strategy to minimise ATM fees in Thailand in 2026.",
+      slug: "thailand-atm-no-fee",
+    }),
+  component: ThailandAtmNoFee,
+});
 
 function ThailandAtmNoFee() {
   return (

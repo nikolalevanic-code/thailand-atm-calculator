@@ -1,6 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import BlogLayout from "@/components/blog/BlogLayout";
+import BlogLayout, { buildArticleHead } from "@/components/blog/BlogLayout";
+
+export const Route = createFileRoute("/blog/how-much-cash-thailand")({
+  head: () =>
+    buildArticleHead({
+      title: "How Much Cash to Bring to Thailand in 2026: Daily Budget by Travel Style",
+      description:
+        "Budget travellers need ~1,200 THB/day; mid-range ~2,500 THB. Here’s exactly how much cash to bring to Thailand in 2026 by trip length.",
+      slug: "how-much-cash-thailand",
+    }),
+  component: HowMuchCashThailand,
+});
 
 function HowMuchCashThailand() {
   return (

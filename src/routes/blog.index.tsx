@@ -15,8 +15,10 @@ export const Route = createFileRoute("/blog/")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://www.thailand-atm-calculator.com/blog/" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://www.thailand-atm-calculator.com/blog/" }],
   }),
   component: BlogIndex,
 });

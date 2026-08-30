@@ -1,6 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import BlogLayout from "@/components/blog/BlogLayout";
+import BlogLayout, { buildArticleHead } from "@/components/blog/BlogLayout";
+
+export const Route = createFileRoute("/blog/wise-revolut-thailand")({
+  head: () =>
+    buildArticleHead({
+      title: "Wise vs Revolut for Thailand (2026): Fees, ATM Limits & Which to Choose",
+      description:
+        "Wise charges 1.75% above ฿7,000 free; Revolut gives ฿5,000 free on Standard. Full fee comparison for Thailand ATM withdrawals in 2026.",
+      slug: "wise-revolut-thailand",
+    }),
+  component: WiseRevolutThailand,
+});
 
 function WiseRevolutThailand() {
   return (

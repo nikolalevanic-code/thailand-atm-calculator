@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogBestAtmThailandForeignersRouteImport } from './routes/blog.best-atm-thailand-foreigners'
 import { Route as BlogHowMuchCashThailandRouteImport } from './routes/blog.how-much-cash-thailand'
 import { Route as BlogThailandAtmFeesRouteImport } from './routes/blog.thailand-atm-fees'
@@ -20,6 +21,11 @@ import { Route as BlogWiseRevolutThailandRouteImport } from './routes/blog.wise-
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogBestAtmThailandForeignersRoute =
@@ -63,6 +69,7 @@ export interface FileRoutesByFullPath {
   '/blog/thailand-atm-no-fee': typeof BlogThailandAtmNoFeeRoute
   '/blog/thailand-atm-withdrawal-limit': typeof BlogThailandAtmWithdrawalLimitRoute
   '/blog/wise-revolut-thailand': typeof BlogWiseRevolutThailandRoute
+  '/blog/': typeof BlogIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -72,6 +79,7 @@ export interface FileRoutesByTo {
   '/blog/thailand-atm-no-fee': typeof BlogThailandAtmNoFeeRoute
   '/blog/thailand-atm-withdrawal-limit': typeof BlogThailandAtmWithdrawalLimitRoute
   '/blog/wise-revolut-thailand': typeof BlogWiseRevolutThailandRoute
+  '/blog': typeof BlogIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -82,6 +90,7 @@ export interface FileRoutesById {
   '/blog/thailand-atm-no-fee': typeof BlogThailandAtmNoFeeRoute
   '/blog/thailand-atm-withdrawal-limit': typeof BlogThailandAtmWithdrawalLimitRoute
   '/blog/wise-revolut-thailand': typeof BlogWiseRevolutThailandRoute
+  '/blog/': typeof BlogIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -93,6 +102,7 @@ export interface FileRouteTypes {
     | '/blog/thailand-atm-no-fee'
     | '/blog/thailand-atm-withdrawal-limit'
     | '/blog/wise-revolut-thailand'
+    | '/blog/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -102,6 +112,7 @@ export interface FileRouteTypes {
     | '/blog/thailand-atm-no-fee'
     | '/blog/thailand-atm-withdrawal-limit'
     | '/blog/wise-revolut-thailand'
+    | '/blog'
   id:
     | '__root__'
     | '/'
@@ -111,6 +122,7 @@ export interface FileRouteTypes {
     | '/blog/thailand-atm-no-fee'
     | '/blog/thailand-atm-withdrawal-limit'
     | '/blog/wise-revolut-thailand'
+    | '/blog/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -121,6 +133,7 @@ export interface RootRouteChildren {
   BlogThailandAtmNoFeeRoute: typeof BlogThailandAtmNoFeeRoute
   BlogThailandAtmWithdrawalLimitRoute: typeof BlogThailandAtmWithdrawalLimitRoute
   BlogWiseRevolutThailandRoute: typeof BlogWiseRevolutThailandRoute
+  BlogIndexRoute: typeof BlogIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -130,6 +143,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/best-atm-thailand-foreigners': {
@@ -185,6 +205,7 @@ const rootRouteChildren: RootRouteChildren = {
   BlogThailandAtmNoFeeRoute: BlogThailandAtmNoFeeRoute,
   BlogThailandAtmWithdrawalLimitRoute: BlogThailandAtmWithdrawalLimitRoute,
   BlogWiseRevolutThailandRoute: BlogWiseRevolutThailandRoute,
+  BlogIndexRoute: BlogIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

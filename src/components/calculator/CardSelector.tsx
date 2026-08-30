@@ -72,7 +72,7 @@ export function CardSelector({
           </option>
           {bankNames.map((bank) => (
             <optgroup key={bank} label={bank}>
-              {banks[bank].map((card: CardProfile) => (
+              {(banks[bank] ?? []).map((card: CardProfile) => (
                 <option key={card.id} value={card.id}>
                   {card.product_name} · {CARD_TYPE_LABELS[card.card_type] ?? card.card_type}
                 </option>

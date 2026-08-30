@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import BlogLayout from "@/components/blog/BlogLayout";
+import BlogLayout, { buildArticleHead } from "@/components/blog/BlogLayout";
 import ArticleCalculatorCta from "@/components/blog/ArticleCalculatorCta";
 
 function BestAtmThailand() {
@@ -126,19 +126,13 @@ function BestAtmThailand() {
   );
 }
 
-const TITLE = "Best ATMs in Thailand for Foreigners (2026): Fees, Limits & DCC | Thailand ATM Calculator";
-const DESCRIPTION = "Compare Thai ATM fees, card-network costs, withdrawal limits, and DCC offers before taking out cash with a foreign card.";
-
 export const Route = createFileRoute("/blog/best-atm-thailand-foreigners")({
-  head: () => ({
-    meta: [
-      { title: TITLE },
-      { name: "description", content: DESCRIPTION },
-      { property: "og:title", content: TITLE },
-      { property: "og:description", content: DESCRIPTION },
-      { property: "og:type", content: "article" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
+  head: () =>
+    buildArticleHead({
+      title: "Best ATMs in Thailand for Foreigners (2026): Fees, Limits & DCC",
+      description:
+        "Compare Thai ATM fees, card-network costs, withdrawal limits, and DCC offers before taking out cash with a foreign card.",
+      slug: "best-atm-thailand-foreigners",
+    }),
   component: BestAtmThailand,
 });

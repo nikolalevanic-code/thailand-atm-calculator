@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import BlogLayout from "@/components/blog/BlogLayout";
+import BlogLayout, { buildArticleHead } from "@/components/blog/BlogLayout";
 import ArticleCalculatorCta from "@/components/blog/ArticleCalculatorCta";
 
 const faqItems = [
@@ -292,19 +292,14 @@ function ThailandAtmFees() {
   );
 }
 
-const TITLE = "Thailand ATM Fees (2026): 250–350 THB Fee + Conversion Costs | Thailand ATM Calculator";
-const DESCRIPTION = "Understand Thai ATM fees, Visa and Mastercard charges, card costs, and the conversion offer to decline before you withdraw.";
-
 export const Route = createFileRoute("/blog/thailand-atm-fees")({
-  head: () => ({
-    meta: [
-      { title: TITLE },
-      { name: "description", content: DESCRIPTION },
-      { property: "og:title", content: TITLE },
-      { property: "og:description", content: DESCRIPTION },
-      { property: "og:type", content: "article" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
+  head: () =>
+    buildArticleHead({
+      title: "Thailand ATM Fees (2026): 250–350 THB Fee + Conversion Costs",
+      description:
+        "Understand Thai ATM fees, Visa and Mastercard charges, card costs, and the conversion offer to decline before you withdraw.",
+      slug: "thailand-atm-fees",
+      faqItems,
+    }),
   component: ThailandAtmFees,
 });

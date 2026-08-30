@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import BlogLayout from "@/components/blog/BlogLayout";
+import BlogLayout, { buildArticleHead } from "@/components/blog/BlogLayout";
 
 function HowMuchCashThailand() {
   return (
@@ -151,19 +151,13 @@ function HowMuchCashThailand() {
   );
 }
 
-const TITLE = "How Much Cash to Bring to Thailand in 2026: Daily Budget by Travel Style | Thailand ATM Calculator";
-const DESCRIPTION = "Budget travellers need ~1,200 THB/day; mid-range ~2,500 THB. Here’s exactly how much cash to bring to Thailand in 2026 by trip length.";
-
 export const Route = createFileRoute("/blog/how-much-cash-thailand")({
-  head: () => ({
-    meta: [
-      { title: TITLE },
-      { name: "description", content: DESCRIPTION },
-      { property: "og:title", content: TITLE },
-      { property: "og:description", content: DESCRIPTION },
-      { property: "og:type", content: "article" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
+  head: () =>
+    buildArticleHead({
+      title: "How Much Cash to Bring to Thailand in 2026: Daily Budget by Travel Style",
+      description:
+        "Budget travellers need ~1,200 THB/day; mid-range ~2,500 THB. Here’s exactly how much cash to bring to Thailand in 2026 by trip length.",
+      slug: "how-much-cash-thailand",
+    }),
   component: HowMuchCashThailand,
 });

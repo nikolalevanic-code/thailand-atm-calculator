@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import BlogLayout from "@/components/blog/BlogLayout";
+import BlogLayout, { buildArticleHead } from "@/components/blog/BlogLayout";
 
 function ThailandAtmNoFee() {
   return (
@@ -122,19 +122,13 @@ function ThailandAtmNoFee() {
   );
 }
 
-const TITLE = "How to Withdraw Money in Thailand Without Fees (2026): Best Cards & Strategy | Thailand ATM Calculator";
-const DESCRIPTION = "Wise, Revolut, and Schwab can eliminate your home bank’s charges entirely. Here’s the full strategy to minimise ATM fees in Thailand in 2026.";
-
 export const Route = createFileRoute("/blog/thailand-atm-no-fee")({
-  head: () => ({
-    meta: [
-      { title: TITLE },
-      { name: "description", content: DESCRIPTION },
-      { property: "og:title", content: TITLE },
-      { property: "og:description", content: DESCRIPTION },
-      { property: "og:type", content: "article" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
+  head: () =>
+    buildArticleHead({
+      title: "How to Withdraw Money in Thailand Without Fees (2026): Best Cards & Strategy",
+      description:
+        "Wise, Revolut, and Schwab can eliminate your home bank’s charges entirely. Here’s the full strategy to minimise ATM fees in Thailand in 2026.",
+      slug: "thailand-atm-no-fee",
+    }),
   component: ThailandAtmNoFee,
 });

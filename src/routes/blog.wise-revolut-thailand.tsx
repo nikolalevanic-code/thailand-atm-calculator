@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import BlogLayout from "@/components/blog/BlogLayout";
+import BlogLayout, { buildArticleHead } from "@/components/blog/BlogLayout";
 
 function WiseRevolutThailand() {
   return (
@@ -137,19 +137,13 @@ function WiseRevolutThailand() {
   );
 }
 
-const TITLE = "Wise vs Revolut for Thailand (2026): Fees, ATM Limits & Which to Choose | Thailand ATM Calculator";
-const DESCRIPTION = "Wise charges 1.75% above ฿7,000 free; Revolut gives ฿5,000 free on Standard. Full fee comparison for Thailand ATM withdrawals in 2026.";
-
 export const Route = createFileRoute("/blog/wise-revolut-thailand")({
-  head: () => ({
-    meta: [
-      { title: TITLE },
-      { name: "description", content: DESCRIPTION },
-      { property: "og:title", content: TITLE },
-      { property: "og:description", content: DESCRIPTION },
-      { property: "og:type", content: "article" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
+  head: () =>
+    buildArticleHead({
+      title: "Wise vs Revolut for Thailand (2026): Fees, ATM Limits & Which to Choose",
+      description:
+        "Wise charges 1.75% above ฿7,000 free; Revolut gives ฿5,000 free on Standard. Full fee comparison for Thailand ATM withdrawals in 2026.",
+      slug: "wise-revolut-thailand",
+    }),
   component: WiseRevolutThailand,
 });

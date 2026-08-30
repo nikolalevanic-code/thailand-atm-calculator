@@ -20,27 +20,26 @@ interface BlogLayoutProps {
   faqItems?: FaqItem[];
 }
 
-export default function BlogLayout({
+export function buildArticleHead({
   title,
   description,
-  lastUpdated,
-  children,
-  ctaHeading = "Calculate your exact ATM cost",
-  ctaBody =
-    "Enter your withdrawal amount and home currency to see the true cost — including your bank's fees and the exchange rate spread.",
-  ctaLabel = "Use the free calculator →",
   slug,
   faqItems,
-}: BlogLayoutProps) {
-  const dateModified = lastUpdated === "August 2026" ? "2026-08-30" : "2026-05-30";
-
+}: {
+  title: string;
+  description: string;
+  slug: string;
+  faqItems?: FaqItem[];
+}) {
+  const url = `https://www.thailand-atm-calculator.com/blog/${slug}`;
+  const dateModified = "2026-08-30";
   const schemas: Record<string, unknown>[] = [
     {
       "@context": "https://schema.org",
       "@type": "Article",
       headline: title,
       description,
-      url: `https://www.thailand-atm-calculator.com/blog/${slug}`,
+      url,
       dateModified,
       publisher: {
         "@type": "Organization",
@@ -63,6 +62,34 @@ export default function BlogLayout({
     });
   }
 
+  return {
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "article" },
+      { property: "og:url", content: url },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [{ rel: "canonical", href: url }],
+    scripts: schemas.map((schema) => ({
+      type: "application/ld+json",
+      children: JSON.stringify(schema),
+    })),
+  };
+}
+
+export default function BlogLayout({
+  title,
+  description,
+  lastUpdated,
+  children,
+  ctaHeading = "Calculate your exact ATM cost",
+  ctaBody =
+    "Enter your withdrawal amount and home currency to see the true cost — including your bank's fees and the exchange rate spread.",
+  ctaLabel = "Use the free calculator →",
+}: BlogLayoutProps) {
   return (
     <div className="min-h-screen">
       <SiteNav />
@@ -117,14 +144,6 @@ export default function BlogLayout({
       </article>
 
       <SiteFooter />
-
-      {schemas.map((schema, i) => (
-        <script
-          key={i}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-        />
-      ))}
     </div>
   );
 }

@@ -5,8 +5,8 @@ import BlogLayout, { buildArticleHead } from "@/components/blog/BlogLayout";
 function HowMuchCashThailand() {
   return (
     <BlogLayout
-      title="How Much Cash to Bring to Thailand in 2026: Daily Budget by Travel Style"
-      description="Budget travellers need ~1,200 THB/day; mid-range ~2,500 THB. Here’s exactly how much cash to bring to Thailand in 2026 by trip length."
+      title="How Much Cash You Actually Need in Thailand (Don't Over-Withdraw)"
+      description="Bring too little and you pay ATM fees twice. Bring too much and you risk theft. Here's the right cash amount for your Thailand trip in 2026."
       lastUpdated="May 2026"
       slug="how-much-cash-thailand"
       ctaHeading="See what your planned withdrawals will cost"
@@ -154,9 +154,9 @@ function HowMuchCashThailand() {
 export const Route = createFileRoute("/blog/how-much-cash-thailand")({
   head: () =>
     buildArticleHead({
-      title: "How Much Cash to Bring to Thailand in 2026: Daily Budget by Travel Style",
+      title: "How Much Cash You Actually Need in Thailand (Don't Over-Withdraw)",
       description:
-        "Budget travellers need ~1,200 THB/day; mid-range ~2,500 THB. Here’s exactly how much cash to bring to Thailand in 2026 by trip length.",
+        "Bring too little and you pay ATM fees twice. Bring too much and you risk theft. Here's the right cash amount for your Thailand trip in 2026.",
       slug: "how-much-cash-thailand",
     }),
   component: HowMuchCashThailand,

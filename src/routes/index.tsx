@@ -16,9 +16,10 @@ import {
 import { allCards } from "@/lib/cardData";
 import { fxRatesQuery } from "@/lib/fxQuery";
 
-const TITLE = "Thailand ATM Fee Calculator — See What a Withdrawal Really Costs";
+const TITLE = "Stop Paying Insane Hidden Fees at Thai ATMs — See the Real Cost";
 const DESCRIPTION =
-  "Work out the true cost of withdrawing cash in Thailand: the 250 THB ATM fee, your card's foreign fees, and how much the ATM's currency conversion quietly takes.";
+  "Thai ATMs quietly stack 3 charges on every withdrawal. Use the free calculator to see exactly what your card will cost you — and how much you can save.
+";
 
 export const Route = createFileRoute("/")({
   loader: ({ context }) => context.queryClient.ensureQueryData(fxRatesQuery),

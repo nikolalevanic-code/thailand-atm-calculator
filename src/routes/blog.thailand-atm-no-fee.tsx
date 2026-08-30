@@ -5,8 +5,8 @@ import BlogLayout, { buildArticleHead } from "@/components/blog/BlogLayout";
 function ThailandAtmNoFee() {
   return (
     <BlogLayout
-      title="How to Withdraw Money in Thailand Without Fees (2026): Best Cards & Strategy"
-      description="Wise, Revolut, and Schwab can eliminate your home bank’s charges entirely. Here’s the full strategy to minimise ATM fees in Thailand in 2026."
+      title="How to Withdraw Cash in Thailand Without Getting Ripped Off"
+      description="You can't dodge the Thai ATM flat fee, but you can kill your home bank's charges. Here's the fee-free card strategy that actually works in 2026."
       lastUpdated="August 2026"
       slug="thailand-atm-no-fee"
       ctaHeading="Compare your card against the fee-free alternatives"
@@ -125,9 +125,9 @@ function ThailandAtmNoFee() {
 export const Route = createFileRoute("/blog/thailand-atm-no-fee")({
   head: () =>
     buildArticleHead({
-      title: "How to Withdraw Money in Thailand Without Fees (2026): Best Cards & Strategy",
+      title: "How to Withdraw Cash in Thailand Without Getting Ripped Off",
       description:
-        "Wise, Revolut, and Schwab can eliminate your home bank’s charges entirely. Here’s the full strategy to minimise ATM fees in Thailand in 2026.",
+        "You can't dodge the Thai ATM flat fee, but you can kill your home bank's charges. Here's the fee-free card strategy that actually works in 2026.",
       slug: "thailand-atm-no-fee",
     }),
   component: ThailandAtmNoFee,

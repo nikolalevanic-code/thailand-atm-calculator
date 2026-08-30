@@ -37,8 +37,8 @@ const faqItems = [
 function ThailandAtmFees() {
   return (
     <BlogLayout
-      title="Thailand ATM Fees (2026): 250–350 THB Fee + Conversion Costs"
-      description="Understand Thai ATM fees, Visa and Mastercard charges, card costs, and the conversion offer to decline before you withdraw."
+      title="The 3 Hidden Fees Thai ATMs Charge Foreigners (And How to Beat Them)"
+      description="Thai ATMs hit foreign cards with 3 separate charges. Learn what they are, which ones you can avoid, and how much you can save on every withdrawal."
       lastUpdated="August 2026"
       slug="thailand-atm-fees"
       faqItems={faqItems}
@@ -295,9 +295,9 @@ function ThailandAtmFees() {
 export const Route = createFileRoute("/blog/thailand-atm-fees")({
   head: () =>
     buildArticleHead({
-      title: "Thailand ATM Fees (2026): 250–350 THB Fee + Conversion Costs",
+      title: "The 3 Hidden Fees Thai ATMs Charge Foreigners (And How to Beat Them)",
       description:
-        "Understand Thai ATM fees, Visa and Mastercard charges, card costs, and the conversion offer to decline before you withdraw.",
+        "Thai ATMs hit foreign cards with 3 separate charges. Learn what they are, which ones you can avoid, and how much you can save on every withdrawal.",
       slug: "thailand-atm-fees",
       faqItems,
     }),

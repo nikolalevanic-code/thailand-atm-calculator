@@ -3,9 +3,9 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { AdSlot } from "@/components/AdSlot";
 import { SiteFooter, SiteNav } from "@/components/blog/BlogLayout";
 
-const TITLE = "Thailand ATM & Money Guides (2026) | Thailand ATM Calculator";
+const TITLE = "Don't Let Thai ATMs Rob You: 2026 Fee Guides & Money Hacks";
 const DESCRIPTION =
-  "Practical Thailand ATM guides covering foreign-card fees, withdrawal limits, currency conversion, travel cards, and cash planning.";
+  "Practical Thailand ATM guides that stop you overpaying: foreign-card fees, withdrawal limits, DCC tricks, travel cards, and cash planning.";
 
 export const Route = createFileRoute("/blog/")({
   head: () => ({

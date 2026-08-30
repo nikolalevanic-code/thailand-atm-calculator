@@ -5,8 +5,8 @@ import BlogLayout, { buildArticleHead } from "@/components/blog/BlogLayout";
 function WiseRevolutThailand() {
   return (
     <BlogLayout
-      title="Wise vs Revolut for Thailand (2026): Fees, ATM Limits & Which to Choose"
-      description="Wise charges 1.75% above ฿7,000 free; Revolut gives ฿5,000 free on Standard. Full fee comparison for Thailand ATM withdrawals in 2026."
+      title="Wise vs Revolut in Thailand: Which One Actually Saves You Money?"
+      description="Wise and Revolut both claim to be cheap abroad, but one usually wins in Thailand. See the real fees, limits, and best use-case for 2026."
       lastUpdated="August 2026"
       slug="wise-revolut-thailand"
       ctaHeading="Compare Wise vs Revolut for your specific withdrawal"
@@ -140,9 +140,9 @@ function WiseRevolutThailand() {
 export const Route = createFileRoute("/blog/wise-revolut-thailand")({
   head: () =>
     buildArticleHead({
-      title: "Wise vs Revolut for Thailand (2026): Fees, ATM Limits & Which to Choose",
+      title: "Wise vs Revolut in Thailand: Which One Actually Saves You Money?",
       description:
-        "Wise charges 1.75% above ฿7,000 free; Revolut gives ฿5,000 free on Standard. Full fee comparison for Thailand ATM withdrawals in 2026.",
+        "Wise and Revolut both claim to be cheap abroad, but one usually wins in Thailand. See the real fees, limits, and best use-case for 2026.",
       slug: "wise-revolut-thailand",
     }),
   component: WiseRevolutThailand,

@@ -5,8 +5,8 @@ import BlogLayout, { buildArticleHead } from "@/components/blog/BlogLayout";
 function ThailandAtmWithdrawalLimit() {
   return (
     <BlogLayout
-      title="Thailand ATM Withdrawal Limits (2026): 20,000 THB Per Transaction Explained"
-      description="Most Thai ATMs cap withdrawals at 20,000 THB per transaction. Here are the limits by bank for 2026 — and how to avoid paying double fees."
+      title="Why Small Withdrawals in Thailand Are Costing You a Fortune"
+      description="Thai ATMs charge a flat fee per transaction, so small withdrawals waste money. See the limits by bank and the cheapest way to get your cash."
       lastUpdated="August 2026"
       slug="thailand-atm-withdrawal-limit"
       ctaHeading="See how fees stack up across multiple transactions"
@@ -150,9 +150,9 @@ function ThailandAtmWithdrawalLimit() {
 export const Route = createFileRoute("/blog/thailand-atm-withdrawal-limit")({
   head: () =>
     buildArticleHead({
-      title: "Thailand ATM Withdrawal Limits (2026): 20,000 THB Per Transaction Explained",
+      title: "Why Small Withdrawals in Thailand Are Costing You a Fortune",
       description:
-        "Most Thai ATMs cap withdrawals at 20,000 THB per transaction. Here are the limits by bank for 2026 — and how to avoid paying double fees.",
+        "Thai ATMs charge a flat fee per transaction, so small withdrawals waste money. See the limits by bank and the cheapest way to get your cash.",
       slug: "thailand-atm-withdrawal-limit",
     }),
   component: ThailandAtmWithdrawalLimit,

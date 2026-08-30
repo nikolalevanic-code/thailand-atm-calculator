@@ -16,7 +16,7 @@ import { fxRatesQuery } from "@/lib/fxQuery";
 
 const TITLE = "Thailand ATM Fee Calculator — See What a Withdrawal Really Costs";
 const DESCRIPTION =
-  "Work out the true cost of withdrawing cash in Thailand: the 220 THB ATM fee, your card's foreign fees, and how much the ATM's currency conversion quietly takes.";
+  "Work out the true cost of withdrawing cash in Thailand: the 250 THB ATM fee, your card's foreign fees, and how much the ATM's currency conversion quietly takes.";
 
 export const Route = createFileRoute("/")({
   loader: ({ context }) => context.queryClient.ensureQueryData(fxRatesQuery),
@@ -36,7 +36,7 @@ export const Route = createFileRoute("/")({
 const FAQ = [
   {
     q: "How much does a Thai ATM charge foreigners?",
-    a: "Nearly every Thai bank charges a flat 220 THB per withdrawal on Visa cards and up to 350 THB on some Mastercard withdrawals. It is charged per transaction, so one large withdrawal always beats several small ones.",
+    a: "Nearly every Thai bank charges a flat 250 THB per withdrawal on Visa cards and up to 350 THB on some Mastercard withdrawals. It is charged per transaction, so one large withdrawal always beats several small ones.",
   },
   {
     q: "Should I accept the ATM's conversion to my home currency?",
@@ -84,7 +84,7 @@ function Home() {
           <span className="block text-primary">actually costs you</span>
         </h1>
         <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-muted-foreground">
-          The 220 THB machine fee is the part everyone sees. The conversion the ATM offers you is
+          The 250 THB machine fee is the part everyone sees. The conversion the ATM offers you is
           where the real money goes. Enter your card and find out.
         </p>
       </header>

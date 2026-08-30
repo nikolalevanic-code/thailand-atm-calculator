@@ -1,59 +1,58 @@
-# Go live: Replace the Manus-hosted site with the Lovable build
+# Post-migration Search Console monitoring after moving hosting to Vercel
 
-## Current state
+## Your setup
 
-- The Lovable project is **not published** yet — only a preview URL exists.
-- The preview URL is `https://id-preview--fd926bc9-aa21-40ae-bdf5-2249691e8be1.lovable.app`.
-- Your real domain, `thailand-atm-calculator.com`, is still pointing at the Manus deployment.
-- The site is configured to be **public** once published.
+- Hosting is now on Vercel instead of Lovable's managed hosting.
+- The custom domain `thailand-atm-calculator.com` (or `www.thailand-atm-calculator.com`) will point at Vercel once CNAME/A records propagate.
+- The Lovable project remains the source of truth for the rebuilt design, metadata, and structured data.
 
-## Steps to go live
+## What I can do automatically
 
-### 1. Publish the Lovable app
+I can run scheduled or on-demand checks using the connected Google Search Console connector:
 
-- Click **Publish** in the top-right of the Lovable editor (desktop) or bottom-right in Preview mode (mobile).
-- This creates a permanent public URL on `project--{project-id}.lovable.app`.
-- Backend (server functions, any future database) deploys automatically; frontend needs the Publish dialog's **Update** click to go live after each change.
+1. **DNS / domain verification** — confirm the domain resolves to Vercel and the site is reachable.
+2. **Search Console property resolution** — list verified properties and confirm the exact `siteUrl` that covers your live domain.
+3. **Sitemap status** — read whether Google processed the sitemap and if it reports errors or warnings.
+4. **URL Inspection (read-only)** — check the indexed version of key URLs for coverage, mobile usability, and rich-results state.
+5. **Search analytics snapshot** — pull clicks, impressions, CTR, and average position after the migration to watch for drops.
 
-### 2. Connect your custom domain
+## What I cannot do automatically
 
-- In Lovable: **Project Settings → Project section → Domains**, or use the **Publish dialog → Add custom domain**.
-- Enter `thailand-atm-calculator.com` (and `www.thailand-atm-calculator.com` if you want the www redirect).
-- Lovable will give you DNS records (usually CNAME or A/AAAA records) to add at your domain registrar/DNS provider.
+Google's Search Console API does **not** support live testing, requesting indexing, or requesting a re-crawl. "Inspect URL" in the Search Console UI is a manual action. After DNS propagates, the fastest way to get Google to re-evaluate the new site is for you to:
 
-### 3. Update DNS at your domain provider
+- Log into Search Console,
+- Use the URL Inspection tool on the homepage and a few top blog pages,
+- Click **Request indexing** for each.
 
-- Add the records Lovable provides.
-- Wait for DNS propagation (typically a few minutes to a few hours; TTL matters).
-- Lovable will validate the domain and issue an SSL certificate automatically.
+I cannot trigger that step for you.
 
-### 4. Set the canonical domain in the app
+## Suggested monitoring plan
 
-- The app already references `https://www.thailand-atm-calculator.com` in canonical links, OG URLs, and sitemap/robots.
-- If you prefer the bare domain (`thailand-atm-calculator.com`) over `www`, we need to update those references across routes and `public/sitemap.xml` + `public/robots.txt`.
+### Step 1: Confirm DNS propagation
 
-### 5. Redirect or shut down the Manus deployment
+- Check that the domain resolves to Vercel's IPs/CNAME and that `https://www.thailand-atm-calculator.com` returns the new build.
+- Verify the canonical tags, OG tags, and JSON-LD in the server-rendered HTML match the live domain.
 
-- Once the Lovable site is live on your domain and verified, stop the Manus deployment to avoid duplicate content and split traffic.
-- If Manus gives you a separate subdomain/URL, set a 301 redirect from it to your primary domain.
+### Step 2: Re-submit the sitemap
 
-### 6. Verify the switch
+- Once the live domain is stable on Vercel, submit `https://www.thailand-atm-calculator.com/sitemap.xml` to the correct Search Console property.
+- If you switch from `www` to the bare domain, update canonical links, OG URLs, and the sitemap/robots files first, then submit the matching sitemap.
 
-- Confirm `https://www.thailand-atm-calculator.com` serves the new Lovable build.
-- Check that the canonical tag, OG tags, and sitemap all match the live domain.
-- Re-scrape the homepage in Facebook, X, and LinkedIn debuggers so social previews refresh.
+### Step 3: URL Inspection read (automated)
+
+- Inspect the homepage and the top 6 blog URLs to capture their indexed state after the migration.
+- Report back coverage status, any mobile-usability issues, and whether canonicals are accepted.
+
+### Step 4: Watch traffic for 7–14 days
+
+- Pull a post-migration search-analytics snapshot and compare it to the August baseline stored in project memory.
+- Flag any sharp drops in clicks, impressions, or average position.
 
 ## Open decision
 
-Do you want the live URL to be:
+What is the exact live URL you want Google to index?
 
-- **A)** `https://www.thailand-atm-calculator.com` (current canonical in the code), or
-- **B)** `https://thailand-atm-calculator.com` (bare domain)?
+- **A)** `https://www.thailand-atm-calculator.com` (matches current canonicals and sitemap)
+- **B)** `https://thailand-atm-calculator.com` (bare domain — requires updating canonicals, OG URLs, sitemap, and robots)
 
-If you choose B, I will update all canonical links, OG URLs, and the sitemap/robots files before you publish.
-
-## Notes
-
-- Custom domains require a paid Lovable plan.
-- Do not change DNS before publishing — publish first, get the live target, then point DNS.
-- Keep the Manus site running until DNS propagation is confirmed to avoid downtime.
+Once you confirm, I can run the automated checks and tell you exactly what to request manually in Search Console.

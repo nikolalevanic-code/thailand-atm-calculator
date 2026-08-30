@@ -18,8 +18,7 @@ import { fxRatesQuery } from "@/lib/fxQuery";
 
 const TITLE = "Stop Paying Insane Hidden Fees at Thai ATMs — See the Real Cost";
 const DESCRIPTION =
-  "Thai ATMs quietly stack 3 charges on every withdrawal. Use the free calculator to see exactly what your card will cost you — and how much you can save.
-";
+  "Thai ATMs quietly stack 3 charges on every withdrawal. Use the free calculator to see exactly what your card will cost you — and how much you can save.";
 
 export const Route = createFileRoute("/")({
   loader: ({ context }) => context.queryClient.ensureQueryData(fxRatesQuery),

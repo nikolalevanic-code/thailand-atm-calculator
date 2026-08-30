@@ -58,7 +58,7 @@ export interface CalculationResult {
   totalTHB: number;
   isWithoutBetter: boolean;
   usingDefaultProfile: boolean;
-  defaultProfileBasis?: string;
+  defaultProfileBasis?: string | undefined;
   numTransactions: number;    // number of ATM transactions required
   totalAtmFeeTHB: number;     // total ATM fee across all transactions
 }

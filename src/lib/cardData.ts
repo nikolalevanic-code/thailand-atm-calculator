@@ -84,8 +84,8 @@ export function getCardsByBank(currency: string): Record<string, CardProfile[]> 
   const cards = getCardsByCurrency(currency);
   const grouped: Record<string, CardProfile[]> = {};
   for (const card of cards) {
-    if (!grouped[card.bank_name]) grouped[card.bank_name] = [];
-    grouped[card.bank_name].push(card);
+    const bucket = grouped[card.bank_name] ?? (grouped[card.bank_name] = []);
+    bucket.push(card);
   }
   return grouped;
 }

@@ -1,7 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 
+import { AdSlot } from "@/components/AdSlot";
+import { SiteFooter, SiteNav } from "@/components/blog/BlogLayout";
 import { AmountDial } from "@/components/calculator/AmountDial";
 import { AtmSettings } from "@/components/calculator/AtmSettings";
 import { CardSelector } from "@/components/calculator/CardSelector";
@@ -74,7 +76,9 @@ function Home() {
   );
 
   return (
-    <main className="mx-auto w-full max-w-2xl px-4 pb-24 pt-10 sm:px-6 sm:pt-16">
+    <div className="min-h-screen">
+      <SiteNav />
+      <main className="mx-auto w-full max-w-2xl px-4 pb-20 pt-10 sm:px-6 sm:pt-14">
       <header className="text-center">
         <span className="inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
           Updated {fx.stale ? "rates unavailable" : "with today's rates"}
@@ -116,8 +120,8 @@ function Home() {
           </p>
         )}
 
-        {/* Ad / affiliate slot — highest intent placement */}
-        <div data-ad-slot="below-results" className="min-h-0" />
+        {/* Monetisation: highest-intent placement — the user just saw what their card costs */}
+        <AdSlot id="below-results" label="Recommended cards" />
 
         <section className="rounded-3xl border border-border bg-card/60 p-6 sm:p-7">
           <h2 className="font-display text-2xl font-semibold text-foreground">
@@ -156,6 +160,21 @@ function Home() {
         </section>
       </div>
 
+      <section className="mt-5 rounded-3xl border border-border bg-card/60 p-6 sm:p-7">
+          <h2 className="font-display text-2xl font-semibold text-foreground">Thailand money guides</h2>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+            Deeper reading on fees, limits, and the best cards to bring.
+          </p>
+          <Link
+            to="/blog"
+            className="mt-4 inline-flex items-center rounded-xl border border-primary/40 bg-primary/10 px-4 py-2.5 text-sm font-semibold text-primary no-underline transition-colors hover:bg-primary/20"
+          >
+            Read the guides →
+          </Link>
+        </section>
+
+        <AdSlot id="home-footer" className="mt-5" />
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -170,6 +189,8 @@ function Home() {
           }),
         }}
       />
-    </main>
+      </main>
+      <SiteFooter />
+    </div>
   );
 }

@@ -1,24 +1,175 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { useMemo, useState } from "react";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+import { AmountDial } from "@/components/calculator/AmountDial";
+import { AtmSettings } from "@/components/calculator/AtmSettings";
+import { CardSelector } from "@/components/calculator/CardSelector";
+import { ResultPanel } from "@/components/calculator/ResultPanel";
+import {
+  DEFAULT_ATM_LIMIT_THB,
+  THAI_ATM_FEE_VISA,
+  calculate,
+} from "@/lib/calculator";
+import { allCards } from "@/lib/cardData";
+import { fxRatesQuery } from "@/lib/fxQuery";
+
+const TITLE = "Thailand ATM Fee Calculator — See What a Withdrawal Really Costs";
+const DESCRIPTION =
+  "Work out the true cost of withdrawing cash in Thailand: the 220 THB ATM fee, your card's foreign fees, and how much the ATM's currency conversion quietly takes.";
+
 export const Route = createFileRoute("/")({
-  component: Index,
+  loader: ({ context }) => context.queryClient.ensureQueryData(fxRatesQuery),
+  head: () => ({
+    meta: [
+      { title: TITLE },
+      { name: "description", content: DESCRIPTION },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESCRIPTION },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: Home,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+const FAQ = [
+  {
+    q: "How much does a Thai ATM charge foreigners?",
+    a: "Nearly every Thai bank charges a flat 220 THB per withdrawal on Visa cards and up to 350 THB on some Mastercard withdrawals. It is charged per transaction, so one large withdrawal always beats several small ones.",
+  },
+  {
+    q: "Should I accept the ATM's conversion to my home currency?",
+    a: "No. Dynamic currency conversion (DCC) typically costs around 7% versus the interbank rate, while your card network's own rate is roughly 2.2% off. Always pick 'continue without conversion' or 'charge me in THB'.",
+  },
+  {
+    q: "What is the maximum I can withdraw at once?",
+    a: "Most Thai ATMs cap a single withdrawal at 20,000–30,000 THB. Since the fee is per transaction, withdrawing at the highest limit your machine and card allow is the cheapest approach.",
+  },
+];
+
+function Home() {
+  const { data: fx } = useSuspenseQuery(fxRatesQuery);
+
+  const [amount, setAmount] = useState(20000);
+  const [currency, setCurrency] = useState("AUD");
+  const [cardId, setCardId] = useState("");
+  const [atmFee, setAtmFee] = useState(THAI_ATM_FEE_VISA);
+  const [atmLimit, setAtmLimit] = useState(DEFAULT_ATM_LIMIT_THB);
+
+  const card = useMemo(() => allCards.find((c) => c.id === cardId) ?? null, [cardId]);
+
+  const result = useMemo(
+    () =>
+      calculate({
+        withdrawalAmountTHB: amount,
+        thaiAtmFeeTHB: atmFee,
+        atmLimitTHB: atmLimit,
+        currency,
+        spotRateTHBperUnit: fx.rates[currency] ?? 0,
+        card,
+        allRates: fx.rates,
+      }),
+    [amount, atmFee, atmLimit, currency, fx.rates, card],
+  );
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
+    <main className="mx-auto w-full max-w-2xl px-4 pb-24 pt-10 sm:px-6 sm:pt-16">
+      <header className="text-center">
+        <span className="inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+          Updated {fx.stale ? "rates unavailable" : "with today's rates"}
+        </span>
+        <h1 className="mt-5 font-display text-4xl font-bold leading-[1.08] text-foreground sm:text-5xl">
+          What a Thai ATM withdrawal
+          <span className="block text-primary">actually costs you</span>
+        </h1>
+        <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-muted-foreground">
+          The 220 THB machine fee is the part everyone sees. The conversion the ATM offers you is
+          where the real money goes. Enter your card and find out.
+        </p>
+      </header>
+
+      <div className="mt-10 space-y-5">
+        <section className="rounded-3xl border border-border bg-card/80 p-6 backdrop-blur sm:p-7">
+          <div className="space-y-7">
+            <AmountDial value={amount} onChange={setAmount} />
+            <CardSelector
+              currency={currency}
+              onCurrencyChange={setCurrency}
+              cardId={cardId}
+              onCardChange={setCardId}
+            />
+            <AtmSettings
+              atmFee={atmFee}
+              onAtmFeeChange={setAtmFee}
+              atmLimit={atmLimit}
+              onAtmLimitChange={setAtmLimit}
+            />
+          </div>
+        </section>
+
+        {result ? (
+          <ResultPanel result={result} />
+        ) : (
+          <p className="rounded-3xl border border-border bg-card/60 p-6 text-sm text-muted-foreground">
+            Enter an amount above to see the comparison.
+          </p>
+        )}
+
+        {/* Ad / affiliate slot — highest intent placement */}
+        <div data-ad-slot="below-results" className="min-h-0" />
+
+        <section className="rounded-3xl border border-border bg-card/60 p-6 sm:p-7">
+          <h2 className="font-display text-2xl font-semibold text-foreground">
+            Three rules that save the most
+          </h2>
+          <ul className="mt-5 space-y-4 text-sm leading-relaxed text-muted-foreground">
+            <li>
+              <span className="font-semibold text-foreground">Withdraw the maximum.</span> The 220
+              THB fee is per transaction, not per baht. Two 10,000 THB withdrawals cost double.
+            </li>
+            <li>
+              <span className="font-semibold text-foreground">Always decline conversion.</span> When
+              the ATM offers your home currency, say no. That screen costs about 7%.
+            </li>
+            <li>
+              <span className="font-semibold text-foreground">Bring the right card.</span> A card
+              with no foreign transaction fee saves more over a trip than any other single choice.
+            </li>
+          </ul>
+        </section>
+
+        <section className="rounded-3xl border border-border bg-card/60 p-6 sm:p-7">
+          <h2 className="font-display text-2xl font-semibold text-foreground">
+            Frequently asked questions
+          </h2>
+          <div className="mt-5 divide-y divide-border">
+            {FAQ.map((item) => (
+              <details key={item.q} className="group py-4">
+                <summary className="cursor-pointer list-none font-semibold text-foreground marker:hidden">
+                  {item.q}
+                </summary>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+      </div>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: FAQ.map((item) => ({
+              "@type": "Question",
+              name: item.q,
+              acceptedAnswer: { "@type": "Answer", text: item.a },
+            })),
+          }),
+        }}
       />
-    </div>
+    </main>
   );
 }

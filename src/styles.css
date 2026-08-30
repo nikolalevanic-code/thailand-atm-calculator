@@ -178,12 +178,12 @@
 .prose-article ol { list-style: decimal; }
 .prose-article li { margin-bottom: 0.35rem; }
 .prose-article strong { font-weight: 600; color: var(--foreground); }
-.prose-article a {
+.prose-article a:not([class]) {
   color: var(--primary);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
-.prose-article a:hover { opacity: 0.8; }
+.prose-article a:not([class]):hover { opacity: 0.8; }
 .prose-article table {
   width: 100%;
   border-collapse: collapse;

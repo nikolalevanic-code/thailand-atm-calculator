@@ -7,16 +7,28 @@ const TITLE = "Don't Let Thai ATMs Rob You: 2026 Fee Guides & Money Hacks";
 const DESCRIPTION =
   "Practical Thailand ATM guides that stop you overpaying: foreign-card fees, withdrawal limits, DCC tricks, travel cards, and cash planning.";
 
+const OG_TITLE = "Everything Thai ATMs don't want you to know";
+const OG_DESCRIPTION =
+  "Fees, limits, DCC traps and the cards that actually save money in Thailand — all in one place.";
+const OG_IMAGE = "https://www.thailand-atm-calculator.com/og-blog.jpg";
+
 export const Route = createFileRoute("/blog/")({
   head: () => ({
     meta: [
       { title: TITLE },
       { name: "description", content: DESCRIPTION },
-      { property: "og:title", content: TITLE },
-      { property: "og:description", content: DESCRIPTION },
+      { property: "og:title", content: OG_TITLE },
+      { property: "og:description", content: OG_DESCRIPTION },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://www.thailand-atm-calculator.com/blog/" },
+      { property: "og:image", content: OG_IMAGE },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "Thailand money guides — ATM fees, limits and travel cards" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: OG_TITLE },
+      { name: "twitter:description", content: OG_DESCRIPTION },
+      { name: "twitter:image", content: OG_IMAGE },
     ],
     links: [{ rel: "canonical", href: "https://www.thailand-atm-calculator.com/blog/" }],
   }),

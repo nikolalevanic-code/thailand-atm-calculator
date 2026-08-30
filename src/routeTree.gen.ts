@@ -10,33 +10,117 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlogBestAtmThailandForeignersRouteImport } from './routes/blog.best-atm-thailand-foreigners'
+import { Route as BlogHowMuchCashThailandRouteImport } from './routes/blog.how-much-cash-thailand'
+import { Route as BlogThailandAtmFeesRouteImport } from './routes/blog.thailand-atm-fees'
+import { Route as BlogThailandAtmNoFeeRouteImport } from './routes/blog.thailand-atm-no-fee'
+import { Route as BlogThailandAtmWithdrawalLimitRouteImport } from './routes/blog.thailand-atm-withdrawal-limit'
+import { Route as BlogWiseRevolutThailandRouteImport } from './routes/blog.wise-revolut-thailand'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogBestAtmThailandForeignersRoute =
+  BlogBestAtmThailandForeignersRouteImport.update({
+    id: '/blog/best-atm-thailand-foreigners',
+    path: '/blog/best-atm-thailand-foreigners',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const BlogHowMuchCashThailandRoute = BlogHowMuchCashThailandRouteImport.update({
+  id: '/blog/how-much-cash-thailand',
+  path: '/blog/how-much-cash-thailand',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogThailandAtmFeesRoute = BlogThailandAtmFeesRouteImport.update({
+  id: '/blog/thailand-atm-fees',
+  path: '/blog/thailand-atm-fees',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogThailandAtmNoFeeRoute = BlogThailandAtmNoFeeRouteImport.update({
+  id: '/blog/thailand-atm-no-fee',
+  path: '/blog/thailand-atm-no-fee',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogThailandAtmWithdrawalLimitRoute =
+  BlogThailandAtmWithdrawalLimitRouteImport.update({
+    id: '/blog/thailand-atm-withdrawal-limit',
+    path: '/blog/thailand-atm-withdrawal-limit',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const BlogWiseRevolutThailandRoute = BlogWiseRevolutThailandRouteImport.update({
+  id: '/blog/wise-revolut-thailand',
+  path: '/blog/wise-revolut-thailand',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/blog/best-atm-thailand-foreigners': typeof BlogBestAtmThailandForeignersRoute
+  '/blog/how-much-cash-thailand': typeof BlogHowMuchCashThailandRoute
+  '/blog/thailand-atm-fees': typeof BlogThailandAtmFeesRoute
+  '/blog/thailand-atm-no-fee': typeof BlogThailandAtmNoFeeRoute
+  '/blog/thailand-atm-withdrawal-limit': typeof BlogThailandAtmWithdrawalLimitRoute
+  '/blog/wise-revolut-thailand': typeof BlogWiseRevolutThailandRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/blog/best-atm-thailand-foreigners': typeof BlogBestAtmThailandForeignersRoute
+  '/blog/how-much-cash-thailand': typeof BlogHowMuchCashThailandRoute
+  '/blog/thailand-atm-fees': typeof BlogThailandAtmFeesRoute
+  '/blog/thailand-atm-no-fee': typeof BlogThailandAtmNoFeeRoute
+  '/blog/thailand-atm-withdrawal-limit': typeof BlogThailandAtmWithdrawalLimitRoute
+  '/blog/wise-revolut-thailand': typeof BlogWiseRevolutThailandRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/blog/best-atm-thailand-foreigners': typeof BlogBestAtmThailandForeignersRoute
+  '/blog/how-much-cash-thailand': typeof BlogHowMuchCashThailandRoute
+  '/blog/thailand-atm-fees': typeof BlogThailandAtmFeesRoute
+  '/blog/thailand-atm-no-fee': typeof BlogThailandAtmNoFeeRoute
+  '/blog/thailand-atm-withdrawal-limit': typeof BlogThailandAtmWithdrawalLimitRoute
+  '/blog/wise-revolut-thailand': typeof BlogWiseRevolutThailandRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/blog/best-atm-thailand-foreigners'
+    | '/blog/how-much-cash-thailand'
+    | '/blog/thailand-atm-fees'
+    | '/blog/thailand-atm-no-fee'
+    | '/blog/thailand-atm-withdrawal-limit'
+    | '/blog/wise-revolut-thailand'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/blog/best-atm-thailand-foreigners'
+    | '/blog/how-much-cash-thailand'
+    | '/blog/thailand-atm-fees'
+    | '/blog/thailand-atm-no-fee'
+    | '/blog/thailand-atm-withdrawal-limit'
+    | '/blog/wise-revolut-thailand'
+  id:
+    | '__root__'
+    | '/'
+    | '/blog/best-atm-thailand-foreigners'
+    | '/blog/how-much-cash-thailand'
+    | '/blog/thailand-atm-fees'
+    | '/blog/thailand-atm-no-fee'
+    | '/blog/thailand-atm-withdrawal-limit'
+    | '/blog/wise-revolut-thailand'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BlogBestAtmThailandForeignersRoute: typeof BlogBestAtmThailandForeignersRoute
+  BlogHowMuchCashThailandRoute: typeof BlogHowMuchCashThailandRoute
+  BlogThailandAtmFeesRoute: typeof BlogThailandAtmFeesRoute
+  BlogThailandAtmNoFeeRoute: typeof BlogThailandAtmNoFeeRoute
+  BlogThailandAtmWithdrawalLimitRoute: typeof BlogThailandAtmWithdrawalLimitRoute
+  BlogWiseRevolutThailandRoute: typeof BlogWiseRevolutThailandRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +132,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/best-atm-thailand-foreigners': {
+      id: '/blog/best-atm-thailand-foreigners'
+      path: '/blog/best-atm-thailand-foreigners'
+      fullPath: '/blog/best-atm-thailand-foreigners'
+      preLoaderRoute: typeof BlogBestAtmThailandForeignersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/how-much-cash-thailand': {
+      id: '/blog/how-much-cash-thailand'
+      path: '/blog/how-much-cash-thailand'
+      fullPath: '/blog/how-much-cash-thailand'
+      preLoaderRoute: typeof BlogHowMuchCashThailandRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/thailand-atm-fees': {
+      id: '/blog/thailand-atm-fees'
+      path: '/blog/thailand-atm-fees'
+      fullPath: '/blog/thailand-atm-fees'
+      preLoaderRoute: typeof BlogThailandAtmFeesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/thailand-atm-no-fee': {
+      id: '/blog/thailand-atm-no-fee'
+      path: '/blog/thailand-atm-no-fee'
+      fullPath: '/blog/thailand-atm-no-fee'
+      preLoaderRoute: typeof BlogThailandAtmNoFeeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/thailand-atm-withdrawal-limit': {
+      id: '/blog/thailand-atm-withdrawal-limit'
+      path: '/blog/thailand-atm-withdrawal-limit'
+      fullPath: '/blog/thailand-atm-withdrawal-limit'
+      preLoaderRoute: typeof BlogThailandAtmWithdrawalLimitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/wise-revolut-thailand': {
+      id: '/blog/wise-revolut-thailand'
+      path: '/blog/wise-revolut-thailand'
+      fullPath: '/blog/wise-revolut-thailand'
+      preLoaderRoute: typeof BlogWiseRevolutThailandRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BlogBestAtmThailandForeignersRoute: BlogBestAtmThailandForeignersRoute,
+  BlogHowMuchCashThailandRoute: BlogHowMuchCashThailandRoute,
+  BlogThailandAtmFeesRoute: BlogThailandAtmFeesRoute,
+  BlogThailandAtmNoFeeRoute: BlogThailandAtmNoFeeRoute,
+  BlogThailandAtmWithdrawalLimitRoute: BlogThailandAtmWithdrawalLimitRoute,
+  BlogWiseRevolutThailandRoute: BlogWiseRevolutThailandRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

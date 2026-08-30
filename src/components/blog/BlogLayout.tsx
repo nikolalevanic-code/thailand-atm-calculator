@@ -20,19 +20,33 @@ interface BlogLayoutProps {
   faqItems?: FaqItem[];
 }
 
+const SITE_ORIGIN = "https://www.thailand-atm-calculator.com";
+const DEFAULT_OG_IMAGE = `${SITE_ORIGIN}/og-blog.jpg`;
+
 export function buildArticleHead({
   title,
   description,
   slug,
   faqItems,
+  ogTitle,
+  ogDescription,
+  ogImage = DEFAULT_OG_IMAGE,
+  ogImageAlt = "Thailand ATM Calculator — Thai ATM fees and travel money guides",
 }: {
   title: string;
   description: string;
   slug: string;
   faqItems?: FaqItem[];
+  /** Punchier headline used when the link is shared on social. Falls back to the SERP title. */
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
+  ogImageAlt?: string;
 }) {
-  const url = `https://www.thailand-atm-calculator.com/blog/${slug}`;
+  const url = `${SITE_ORIGIN}/blog/${slug}`;
   const dateModified = "2026-08-30";
+  const socialTitle = ogTitle ?? title;
+  const socialDescription = ogDescription ?? description;
   const schemas: Record<string, unknown>[] = [
     {
       "@context": "https://schema.org",
@@ -40,11 +54,12 @@ export function buildArticleHead({
       headline: title,
       description,
       url,
+      image: ogImage,
       dateModified,
       publisher: {
         "@type": "Organization",
         name: "Thailand ATM Calculator",
-        url: "https://www.thailand-atm-calculator.com",
+        url: SITE_ORIGIN,
       },
       inLanguage: "en",
     },
@@ -66,11 +81,18 @@ export function buildArticleHead({
     meta: [
       { title },
       { name: "description", content: description },
-      { property: "og:title", content: title },
-      { property: "og:description", content: description },
+      { property: "og:title", content: socialTitle },
+      { property: "og:description", content: socialDescription },
       { property: "og:type", content: "article" },
       { property: "og:url", content: url },
+      { property: "og:image", content: ogImage },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: ogImageAlt },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: socialTitle },
+      { name: "twitter:description", content: socialDescription },
+      { name: "twitter:image", content: ogImage },
     ],
     links: [{ rel: "canonical", href: url }],
     scripts: schemas.map((schema) => ({

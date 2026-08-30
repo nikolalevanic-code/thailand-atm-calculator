@@ -2,17 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import BlogLayout, { buildArticleHead } from "@/components/blog/BlogLayout";
 
-export const Route = createFileRoute("/blog/thailand-atm-withdrawal-limit")({
-  head: () =>
-    buildArticleHead({
-      title: "Thailand ATM Withdrawal Limits (2026): 20,000 THB Per Transaction Explained",
-      description:
-        "Most Thai ATMs cap withdrawals at 20,000 THB per transaction. Here are the limits by bank for 2026 — and how to avoid paying double fees.",
-      slug: "thailand-atm-withdrawal-limit",
-    }),
-  component: ThailandAtmWithdrawalLimit,
-});
-
 function ThailandAtmWithdrawalLimit() {
   return (
     <BlogLayout
@@ -158,19 +147,13 @@ function ThailandAtmWithdrawalLimit() {
   );
 }
 
-const TITLE = "Thailand ATM Withdrawal Limits (2026): 20,000 THB Per Transaction Explained | Thailand ATM Calculator";
-const DESCRIPTION = "Most Thai ATMs cap withdrawals at 20,000 THB per transaction. Here are the limits by bank for 2026 — and how to avoid paying double fees.";
-
 export const Route = createFileRoute("/blog/thailand-atm-withdrawal-limit")({
-  head: () => ({
-    meta: [
-      { title: TITLE },
-      { name: "description", content: DESCRIPTION },
-      { property: "og:title", content: TITLE },
-      { property: "og:description", content: DESCRIPTION },
-      { property: "og:type", content: "article" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
+  head: () =>
+    buildArticleHead({
+      title: "Thailand ATM Withdrawal Limits (2026): 20,000 THB Per Transaction Explained",
+      description:
+        "Most Thai ATMs cap withdrawals at 20,000 THB per transaction. Here are the limits by bank for 2026 — and how to avoid paying double fees.",
+      slug: "thailand-atm-withdrawal-limit",
+    }),
   component: ThailandAtmWithdrawalLimit,
 });

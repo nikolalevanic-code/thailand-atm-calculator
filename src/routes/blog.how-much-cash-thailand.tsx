@@ -158,6 +158,9 @@ export const Route = createFileRoute("/blog/how-much-cash-thailand")({
       description:
         "Bring too little and you pay ATM fees twice. Bring too much and you risk theft. Here's the right cash amount for your Thailand trip in 2026.",
       slug: "how-much-cash-thailand",
+      ogTitle: "Most travellers get their Thailand cash budget wrong",
+      ogDescription:
+        "Daily spend by travel style, where cards genuinely don't work, and how to avoid paying the ATM fee twice.",
     }),
   component: HowMuchCashThailand,
 });

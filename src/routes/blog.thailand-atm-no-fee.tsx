@@ -129,6 +129,9 @@ export const Route = createFileRoute("/blog/thailand-atm-no-fee")({
       description:
         "You can't dodge the Thai ATM flat fee, but you can kill your home bank's charges. Here's the fee-free card strategy that actually works in 2026.",
       slug: "thailand-atm-no-fee",
+      ogTitle: "Most of what you pay at a Thai ATM is avoidable",
+      ogDescription:
+        "One unavoidable fee, three you can delete. The cards and habits that get you closest to zero.",
     }),
   component: ThailandAtmNoFee,
 });

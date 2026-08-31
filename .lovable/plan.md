@@ -1,55 +1,27 @@
-# Manual Google Search Console checklist after going live on Vercel
+# Design a new favicon
 
-## URLs to inspect in Search Console
+## Context
 
-Inspect each URL below, then click **Request indexing** if the indexed version does not match the new site or if the last crawl predates the migration.
+The site currently serves the default Lovable favicon at `public/favicon.ico`, referenced from `src/routes/__root.tsx` as `/favicon.ico`. The user wants a custom favicon on a solid Midnight Card background, with either a stylised Thai baht symbol or a purple abstract mark.
 
-1. `https://www.thailand-atm-calculator.com/` (homepage)
-2. `https://www.thailand-atm-calculator.com/blog`
-3. `https://www.thailand-atm-calculator.com/blog/thailand-atm-fees`
-4. `https://www.thailand-atm-calculator.com/blog/best-atm-thailand-foreigners`
-5. `https://www.thailand-atm-calculator.com/blog/thailand-atm-withdrawal-limit`
-6. `https://www.thailand-atm-calculator.com/blog/thailand-atm-no-fee`
-7. `https://www.thailand-atm-calculator.com/blog/wise-revolut-thailand`
-8. `https://www.thailand-atm-calculator.com/blog/how-much-cash-thailand`
+## Approach
 
-## What to look for in each inspection
+Generate three favicon concepts, present them for choice, then produce the final asset and wire it into the root route.
 
-- **Page fetch**: Google successfully fetched the new Vercel version.
-- **Indexing**: URL is indexed.
-- **Canonical**: Google-selected canonical matches the URL you submitted (not the old Manus URL).
-- **Mobile usability**: No errors.
-- **Rich results / structured data**: Article and FAQPage schemas detected where expected.
+## Steps
 
-## Other steps to take
+1. Generate three 1024x1024 favicon source images:
+   - Option A: Stylised Thai baht (฿) mark on a solid Midnight Card purple/navy background.
+   - Option B: Abstract purple geometric/card-shaped mark on a solid Midnight Card background.
+   - Option C: Minimalist ATM/card + baht fusion icon on a solid Midnight Card background.
+2. Present all three options inline for the user to pick.
+3. Downscale the chosen source to a 64x64 square PNG with transparent padding where needed, save as `public/favicon.png`.
+4. Delete `public/favicon.ico` so the old default does not keep being served.
+5. Update `src/routes/__root.tsx` to link to `/favicon.png` with `type: "image/png"`.
+6. Verify the new favicon loads and renders in the browser tab.
 
-### 1. Submit (or re-submit) the sitemap
+## Notes
 
-In Search Console, go to **Sitemaps** and submit:
-
-```
-https://www.thailand-atm-calculator.com/sitemap.xml
-```
-
-### 2. Force social previews to refresh
-
-Facebook, X, and LinkedIn cache OG images. Paste each URL into their debuggers:
-
-- Facebook Sharing Debugger
-- X Card Validator
-- LinkedIn Post Inspector
-
-### 3. Verify the old Manus site is not still being served
-
-- Run `curl -I https://www.thailand-atm-calculator.com` and confirm server headers point to Vercel.
-- If the Manus deployment has its own subdomain or URL, set a 301 redirect to the canonical domain or shut it down to avoid duplicate content.
-
-### 4. Monitor for 7–14 days
-
-- Watch Search Console **Performance** for clicks, impressions, average position, and any coverage drops.
-- Watch **Pages** for new indexing errors or canonical mismatches.
-- Compare post-migration numbers to the August 2026 baseline stored in project memory.
-
-### 5. Optional: tell me to pull a post-migration snapshot
-
-I can read Search Console analytics, URL inspection status, and sitemap status automatically once the property is verified. Reply "pull the snapshot" and I will run the checks and report what changed.
+- Keep the design simple and high-contrast so it reads at 16x16px in a browser tab.
+- The Midnight Card palette is bg #12102A / surface #241C4A / primary #9D7BEA / light #E8E0FF.
+- No other site changes are in scope.

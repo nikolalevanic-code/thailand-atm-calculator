@@ -27,6 +27,21 @@ export const THAI_ATM_FEE_MASTERCARD = 350;  // THB — standard Mastercard fee 
 
 export const DEFAULT_ATM_LIMIT_THB = 20000; // conservative default — most Thai ATMs: 20,000–30,000 THB
 
+/**
+ * Map a card's network string to the Thai ATM fee it would incur.
+ * Returns null when the network is neither Visa nor Mastercard (UnionPay, Mir, JCB).
+ */
+export function networkToAtmFee(network: string | null | undefined): number | null {
+  if (!network) return null;
+  const n = network.toLowerCase();
+  const visaIdx = n.indexOf('visa');
+  const mcIdx = n.search(/mastercard|maestro|cirrus/);
+  if (visaIdx === -1 && mcIdx === -1) return null;
+  if (mcIdx === -1) return THAI_ATM_FEE_VISA;
+  if (visaIdx === -1) return THAI_ATM_FEE_MASTERCARD;
+  return visaIdx < mcIdx ? THAI_ATM_FEE_VISA : THAI_ATM_FEE_MASTERCARD;
+}
+
 export interface CalculatorInputs {
   withdrawalAmountTHB: number;
   thaiAtmFeeTHB: number;

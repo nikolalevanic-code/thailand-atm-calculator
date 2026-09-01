@@ -80,6 +80,13 @@ function Home() {
 
   const card = useMemo(() => allCards.find((c) => c.id === cardId) ?? null, [cardId]);
 
+  const handleCardChange = (nextCardId: string) => {
+    setCardId(nextCardId);
+    const nextCard = allCards.find((c) => c.id === nextCardId);
+    const fee = networkToAtmFee(nextCard?.network);
+    if (fee !== null) setAtmFee(fee);
+  };
+
   const result = useMemo(
     () =>
       calculate({

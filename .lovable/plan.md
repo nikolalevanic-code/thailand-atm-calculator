@@ -1,97 +1,98 @@
-# Traffic → Monetisation Roadmap for thailand-atm-calculator.com
+# Traffic → Monetisation Roadmap (v2)
 
-## Where we are now
+## 1. Current live SERP titles
 
-- Site is live on Vercel with the Lovable rebuild, Midnight Card design, and all 8 routes ported.
-- Search Console baseline (Aug 2026): blog drives ~91% of organic clicks; mobile CTR (1.04%) is 13× desktop CTR (0.08%).
-- Average position ~6.7 with sitewide CTR 0.34% — the biggest near-term lever is SERP metadata and snippet optimisation, not more content.
-- One verified content gap: "AEON atm" query cluster has search demand and no dedicated page.
-- Monetisation slots are reserved (`below-results`, `article-mid`, `article-affiliate`, etc.) but empty.
+| Page | Title in the code today |
+| --- | --- |
+| `/` | Stop Paying Insane Hidden Fees at Thai ATMs — See the Real Cost |
+| `/blog` | Don't Let Thai ATMs Rob You: 2026 Fee Guides & Money Hacks |
+| `/blog/thailand-atm-fees` | The 3 Hidden Fees Thai ATMs Charge Foreigners (And How to Beat Them) |
+| `/blog/thailand-atm-withdrawal-limit` | Why Small Withdrawals in Thailand Are Costing You a Fortune |
+| `/blog/thailand-atm-no-fee` | How to Withdraw Cash in Thailand Without Getting Ripped Off |
+| `/blog/best-atm-thailand-foreigners` | The Best ATMs in Thailand for Foreign Cards (Avoid the Tourist Traps) |
+| `/blog/wise-revolut-thailand` | Wise vs Revolut in Thailand: Which One Actually Saves You Money? |
+| `/blog/how-much-cash-thailand` | How Much Cash You Actually Need in Thailand (Don't Over-Withdraw) |
 
-## Guiding principle
+These are the emotionally-driven set we shipped. Google may still display older cached titles or rewrite them for some queries; that settles over a few weeks.
 
-Traffic first, then monetisation. A site with 500 visits/day and strong affiliate intent earns more than a site with 5,000 visits/day and no intent. The calculator creates intent; the blog captures it. Every phase builds the next.
+## 2. AEON — drop the dedicated page, keep the answer
 
-## Phase 1: Traffic foundations (Weeks 1–2)
+Semrush (US) puts "aeon atm thailand" at only ~20 searches/month, so a dedicated page was never going to be a traffic driver even before AEON withdrew. Better play: turn it into a credibility signal.
 
-Goal: make every existing page rank as well as it can before adding new pages.
+- Add an "AEON ATMs in Thailand: what happened" section inside `/blog/best-atm-thailand-foreigners` (our top-performing article) rather than a new page.
+- Be explicit that AEON no longer operates the fee-free ATM network foreigners used to seek out, and redirect the reader to what actually works now.
+- This captures the residual "aeon atm thailand" searches, satisfies the intent instead of frustrating it, and signals freshness to Google — outdated advice is everywhere on this topic, so being the page that says "this changed" is a real differentiator.
 
-1. Fix remaining SEO findings
-   - Run the SEO scan, address any residual metadata, canonical, or structured-data issues.
-   - Ensure every route has unique title/description/og and valid JSON-LD.
+Before writing it I need one thing from you: your source and rough date for AEON pulling out, so the claim is verifiable rather than asserted.
 
-2. SERP CTR sprint
-   - Rewrite titles/descriptions for every blog article using the emotionally-driven formula already applied to the homepage.
-   - A/B test homepage title variants via Search Console "performance by query" reviews every 2 weeks.
-   - Add FAQ schema to articles that answer explicit questions (already partially done).
+## 3. The "foreigner ATM" cluster is genuinely worth chasing
 
-3. Internal linking
-   - Add contextual links from each article to the calculator and to 1–2 related articles.
-   - Add a "related guides" component to the bottom of every article.
+Fee-related keywords are low-volume individually (10–170/mo each), which matches your ~0.34% CTR at position 6.7 — we rank, but the pool is small. The volume sits one step out from where we are:
 
-4. Request indexing
-   - Manually inspect and request indexing for all 8 URLs in GSC after any metadata changes.
+| Keyword | Volume | Difficulty | Note |
+| --- | --- | --- | --- |
+| thb to usd | 90,500/mo | 52 | Converter intent — huge |
+| thb to gbp (UK) | 22,200/mo | 35 | Very winnable |
+| thai baht exchange rate | 1,600/mo | 72 | Hard, but the cluster hub |
+| superrich thailand | 590/mo | 60 | Money-changer brand demand |
+| currency exchange bangkok | 170/mo (US) / 90/mo (UK) | 54 / 41 | Direct money-changer intent |
+| how much cash to bring to thailand | 140/mo | 22 | We already have this page |
+| best place to exchange money in bangkok | 70/mo | 23 | Easy win, high affiliate fit |
+| exchange money in thailand | 70/mo | 0 | Easy win |
+| cash or card in thailand (UK) | 90/mo | 19 | $2.41 CPC — commercially valuable |
 
-## Phase 2: Traffic acceleration (Weeks 3–6)
+Source: Semrush, US and UK databases.
 
-Goal: capture adjacent search demand and own the Thailand ATM fee topic cluster.
+The read: **currency conversion is a 100× bigger audience than ATM fees, and it is the same visitor at an earlier moment.** Someone checking "THB to USD" hasn't landed yet. Someone comparing ATM fees is already at the machine. Owning the earlier moment feeds both your ad inventory and your money-changer ambitions.
 
-1. Fill the AEON gap
-   - Create `/blog/aeon-atm-thailand` targeting "AEON atm", "AEON ATM Thailand fee", "AEON ATM near me".
-   - Include a location-aware angle and a comparison vs Thai bank ATMs.
+## 4. Plan
 
-2. Expand the topic cluster
-   - `/blog/best-debit-card-thailand` — high affiliate intent, compares Wise, Revolut, ING, Citibank, etc.
-   - `/blog/atm-scam-thailand` or `/blog/atm-skimming-thailand` — safety content with strong search volume and shareability.
-   - `/blog/exchange-rate-thailand` — targets "thailand exchange rate", "best exchange rate bangkok".
-   - `/blog/withdraw-cash-thailand-airport` — targets airport ATM queries.
+### Phase A — Own the converter query (highest leverage)
 
-3. Featured-snippet optimisation
-   - Restructure article intros to answer the target query in 40–60 words.
-   - Use tables for fee comparisons and numbered lists for step-by-step processes.
+Build a **THB currency converter tool** at `/thb-converter` (plus `/thb-to-usd`, `/thb-to-gbp`, `/thb-to-aud`, `/thb-to-eur` as targeted landing pages).
 
-4. Content freshness
-   - Add "last updated" badges and refresh the top 3 articles monthly with new fee data or card changes.
+- Reuses the live FX rate server function we already have — no new infrastructure.
+- Each page: live rate, a converter input, "what you'd actually receive" after typical ATM vs money-changer vs card margins, and a link into the ATM calculator.
+- This is the single biggest traffic unlock available to the site and the natural home for money-changer partners.
 
-## Phase 3: Monetisation prep (Weeks 5–8)
+### Phase B — Money-changer content cluster
 
-Goal: turn intent into revenue without hurting the user experience or trust.
+- `/blog/exchange-money-thailand` — money changers vs ATMs vs banks vs airport, with a real rate comparison table.
+- `/blog/best-exchange-rate-bangkok` — Super Rich, Vasu, Twelve Victory, airport booths; targets the "superrich thailand" and "currency exchange bangkok" demand.
+- `/blog/cash-or-card-thailand` — high CPC, low difficulty, directly answers the pre-trip question.
 
-1. Affiliate strategy
-   - Apply to Wise, Revolut, and travel-card affiliate programmes.
-   - Build a "Best travel cards for Thailand" comparison block component.
-   - Place it in `below-results` on the calculator and `article-affiliate` on relevant posts (Wise/Revolut, best debit card, no-fee withdrawals).
+Each carries a "Rates today" module fed by the FX function, giving people a reason to return.
 
-2. Ad strategy
-   - Apply to Google AdSense or Ezoic once traffic supports it.
-   - Start with `article-mid` and `home-footer` display slots.
-   - Keep ads below the fold on mobile to protect the strong mobile CTR.
+### Phase C — Freshness and authority
 
-3. Conversion optimisation
-   - Track calculator-to-affiliate-click rate.
-   - Add a "You could save X% with a no-fee card" callout in the result panel.
-   - A/B test the CTA copy and button placement.
+- AEON update inside the best-ATM article (section 2 above).
+- "Last verified" dates on every article, refreshed monthly.
+- Related-guides links at the bottom of every article; internal links from each new converter page into the calculator.
+- Request indexing in Search Console for every new and updated URL.
 
-## Phase 4: Revenue optimisation (Weeks 8–12)
+### Phase D — Monetisation
 
-Goal: scale what works.
+1. **Money changers / FX partners** — this is what you actually want, and Phase A + B is the inventory that makes you worth partnering with. Approach Bangkok exchange chains and online FX providers once the converter pages have a few weeks of traffic. Pitch: pre-arrival intent traffic, geo-targeted.
+2. **Card affiliates** — Wise, Revolut, travel cards. Build a real comparison component (rate, fee, apply link) for the `below-results` and `article-affiliate` slots. Highest revenue per visitor at your current volume.
+3. **Display ads** — AdSense or Ezoic in `article-mid` and `home-footer` once traffic supports it. Keep them below the fold on mobile; mobile is 80% of your clicks and its CTR is 13× desktop, so protecting that experience matters more than ad density.
+4. **Email capture** — "Get the rate before you fly." Low effort, compounding, and valuable to FX partners.
 
-1. Double down on winning content
-   - Use Search Console and affiliate conversion data to identify the highest-earning articles.
-   - Update and expand those articles quarterly.
+## 5. Sequencing
 
-2. Build topical authority
-   - Add a `/tools` section: a "Thailand travel budget calculator" or "cash vs card calculator".
-   - These become linkable assets and capture broader travel-money intent.
+```text
+Week 1-2   Phase A: converter tool + 4 currency landing pages
+Week 2-3   Phase C: AEON update, freshness dates, internal links
+Week 3-5   Phase B: three money-changer articles
+Week 4-6   Phase D: card affiliate component, then FX partner outreach
+Week 6+    Display ads, email capture, iterate on what ranks
+```
 
-3. Backlink outreach
-   - Pitch the calculator to Thailand travel bloggers, Reddit r/ThailandTourism, and nomad forums.
-   - Target 5–10 quality backlinks in the first quarter.
+## 6. What I need from you
 
-4. Email capture
-   - Add a lightweight newsletter signup: "Get fee updates before your trip".
-   - Use it to re-engage visitors when rates or card offers change.
+- Your source/date for AEON exiting Thailand.
+- Whether you want the converter pages built now (my recommendation) or the money-changer articles first.
+- Any FX or money-changer contacts you already have, so the content can be built with those partners in mind.
 
 ## Immediate next step
 
-Approve this roadmap and I will start Phase 1 by running a fresh SEO scan, then apply the highest-impact CTR and indexing fixes to the existing pages.
+On approval I'll start Phase A: the THB converter tool and its four currency landing pages, wired to the existing FX server function and the Midnight Card design.

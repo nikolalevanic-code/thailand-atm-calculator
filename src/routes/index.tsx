@@ -11,6 +11,7 @@ import { ResultPanel } from "@/components/calculator/ResultPanel";
 import {
   DEFAULT_ATM_LIMIT_THB,
   THAI_ATM_FEE_VISA,
+  networkToAtmFee,
   calculate,
 } from "@/lib/calculator";
 import { allCards } from "@/lib/cardData";
@@ -80,6 +81,13 @@ function Home() {
 
   const card = useMemo(() => allCards.find((c) => c.id === cardId) ?? null, [cardId]);
 
+  const handleCardChange = (nextCardId: string) => {
+    setCardId(nextCardId);
+    const nextCard = allCards.find((c) => c.id === nextCardId);
+    const fee = networkToAtmFee(nextCard?.network);
+    if (fee !== null) setAtmFee(fee);
+  };
+
   const result = useMemo(
     () =>
       calculate({
@@ -120,7 +128,7 @@ function Home() {
               currency={currency}
               onCurrencyChange={setCurrency}
               cardId={cardId}
-              onCardChange={setCardId}
+              onCardChange={handleCardChange}
             />
             <AtmSettings
               atmFee={atmFee}

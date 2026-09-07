@@ -41,7 +41,7 @@ export function ResultPanel({ result, card }: ResultPanelProps) {
       aria-label="Withdrawal result"
       className="card-sheen relative overflow-hidden rounded-3xl border border-primary/30 bg-surface p-6 shadow-[0_24px_60px_-30px_rgba(157,123,234,0.9)] sm:p-8"
     >
-      <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary">
+      <p className="text-sm font-bold uppercase tracking-[0.18em] text-primary">
         Always choose &quot;decline currency conversion&quot;!
       </p>
       <p className="mt-4 text-sm text-muted-foreground">

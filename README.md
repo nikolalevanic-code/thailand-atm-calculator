@@ -48,7 +48,7 @@ Margins are calibrated averages, not live quotes. The model does **not** yet acc
 
 This started as a prototype built in Manus, then was rebuilt and redesigned in Lovable to improve performance, SEO, and mobile UX. Along the way I posted early versions on Reddit, gathered feedback, and iterated. For example, a user asked whether home-bank withdrawal fees were included in the total — they already were, but the breakdown wasn't visible enough. That led to clearer fee sourcing and a planned "what we include / don't include" note in the results.
 
-The earlier prototype repo is archived at [thailand-atm-calc-archive](https://github.com/nikolalevanic-code/thailand-atm-calc-archive) (or whatever the old repo is renamed to).
+The earlier prototype repo is archived at [thailand-atm-calc-archive](https://github.com/nikolalevanic-code/thailand-atm-calc-archive) 
 
 ## License
 

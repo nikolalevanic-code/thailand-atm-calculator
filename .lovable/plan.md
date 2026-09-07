@@ -1,59 +1,43 @@
-# Rename GitHub repos cleanly
+# Post-rename GitHub repo checklist
 
-## Goal
-Make the active Lovable-synced repo carry the `thailand-atm-calculator` name, and rename the old Manus repo so it is clearly archived, without breaking Vercel, Lovable sync, or the live site.
+## Status
+The active repo has already been renamed to `thailand-atm-calculator`. The old Manus repo should now be renamed to `thailand-atm-calc-archive`.
 
-## Decision to make first
+## Steps to finish cleanly
 
-Option A — swap names (recommended if you want the live project at the clean URL/name):
-1. Rename old Manus repo from `thailand-atm-calculator` to `thailand-atm-calc-archive`.
-2. Rename active Lovable-synced repo to `thailand-atm-calculator`.
-3. Reconnect Lovable's GitHub sync to the newly-named active repo.
-4. Check Vercel is still deploying from the right repo/branch.
-
-Option B — leave names as-is:
-- Keep old repo named `thailand-atm-calculator` but archive it, and accept the active repo uses its current name.
-- Less disruption, but the live project does not get the preferred name.
-
-## Step-by-step (Option A)
-
-1. **Open the old Manus repo on GitHub** → Settings → General → Repository name.
-   - Change name to `thailand-atm-calc-archive`.
-   - Click Rename. GitHub automatically redirects the old URL.
-
-2. **Open the active Lovable-synced repo on GitHub** → Settings → General → Repository name.
-   - Change name to `thailand-atm-calculator`.
-   - Click Rename.
-
-3. **In Lovable, reconnect GitHub sync**:
-   - Editor → Plus (+) menu → GitHub → Disconnect (or manage connection).
-   - Reconnect and select the repo now named `thailand-atm-calculator`.
-   - Confirm the default branch is still `main` (or whatever you use).
-
-4. **In Vercel, check the project settings**:
-   - Go to the project → Git → Repository.
-   - If Vercel did not follow the rename automatically, reconnect or reselect `thailand-atm-calculator`.
-   - Trigger a redeploy to confirm builds still work.
-
-5. **Update any external references**:
-   - Repo description/website URL on the active repo.
-   - Any badges, documentation, or social links that pointed to the old repo path.
-   - The old URL will redirect, but update them for cleanliness.
-
-6. **Archive the old repo**:
-   - Old repo → Settings → General → Danger Zone → Archive this repository.
-   - This makes it read-only and shows an "archived" banner.
+1. **Archive the old Manus repo** (if not done yet):
+   - Open `https://github.com/<your-username>/thailand-atm-calc-archive` → Settings → General → Danger Zone.
+   - Click **Archive this repository**. This makes it read-only and shows an "archived" banner.
    - Do not delete it — it preserves the project history.
 
-## Risks and how to avoid mess
+2. **Update the old repo's description** (before or after archiving):
+   - Set the description to something like: "Original prototype — superseded by thailand-atm-calculator".
+   - Add that same line at the top of the old repo's README.
 
-- **Vercel build breaks after rename**: usually it follows the rename, but verify in Vercel settings and trigger a manual deploy.
-- **Lovable sync breaks**: reconnecting in Lovable fixes this; do it before making new edits in Lovable.
-- **Old links die**: GitHub redirects repo renames, but only if you do not create a new repo with the old name. Do not create a new `thailand-atm-calc-archive` repo before the rename is complete.
-- **Two repos with confusing names**: archive the old one immediately after renaming so only the active repo looks alive.
+3. **Update the active repo's README archive link**:
+   - In `README.md`, replace the placeholder "(or whatever the old repo is renamed to)" with the real archived repo URL: `https://github.com/<your-username>/thailand-atm-calc-archive`.
 
-## After the rename
+4. **Verify Lovable GitHub sync still points at `thailand-atm-calculator`**:
+   - In the Lovable editor → Plus (+) menu → GitHub.
+   - Confirm the connected repo is the one now named `thailand-atm-calculator`.
+   - If it still shows the old name or is disconnected, reconnect it.
 
-- Update the active repo's description, website, and topics in GitHub.
-- Verify the live site `https://www.thailand-atm-calculator.com` still loads after Vercel's next deploy.
-- Optionally add a short note in the active README mentioning the rebuild from the archived Manus repo.
+5. **Verify Vercel is deploying from the renamed repo**:
+   - Go to the Vercel project → Git → Repository.
+   - Confirm it points to `thailand-atm-calculator`.
+   - Trigger a manual redeploy to confirm builds still work.
+
+6. **Update active repo metadata on GitHub**:
+   - Description: one-line summary of the calculator.
+   - Website: `https://www.thailand-atm-calculator.com`.
+   - Topics: e.g. `thailand`, `travel`, `fintech`, `atm-fees`, `calculator`.
+
+7. **Smoke-test the live site**:
+   - Visit `https://www.thailand-atm-calculator.com` after the next Vercel deploy.
+   - Confirm the calculator loads and the latest copy changes are live.
+
+## Risks to watch
+
+- **Vercel not following the rename**: rare, but check the Git settings and redeploy.
+- **Lovable sync disconnect**: reconnecting in the editor fixes it; do it before making new edits in Lovable.
+- **README still pointing at the old repo name**: fix the archive link so reviewers don't land on a redirect.

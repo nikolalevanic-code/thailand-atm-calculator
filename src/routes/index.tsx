@@ -65,6 +65,10 @@ const FAQ = [
     a: "No. Dynamic currency conversion (DCC) typically costs around 7% versus the interbank rate, while your card network's own rate is roughly 2.2% off. Always pick 'continue without conversion' or 'charge me in THB'.",
   },
   {
+    q: "Does this include my own bank's fees?",
+    a: "Yes. The totals include your home bank's foreign ATM withdrawal fee, its percentage fee and any foreign transaction fee, on top of the Thai machine fee — every card in the database has a published source and a verification date. What is not modelled yet is monthly free-withdrawal allowances (for example Wise and Revolut give a limited number of free withdrawals per month), premium plan tiers and temporary promotional waivers.",
+  },
+  {
     q: "What is the maximum I can withdraw at once?",
     a: "Most Thai ATMs cap a single withdrawal at 20,000–30,000 THB. Since the fee is per transaction, withdrawing at the highest limit your machine and card allow is the cheapest approach.",
   },
@@ -140,7 +144,7 @@ function Home() {
         </section>
 
         {result ? (
-          <ResultPanel result={result} />
+          <ResultPanel result={result} card={card} />
         ) : (
           <p className="rounded-3xl border border-border bg-card/60 p-6 text-sm text-muted-foreground">
             Enter an amount above to see the comparison.

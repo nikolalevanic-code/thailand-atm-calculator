@@ -1,13 +1,31 @@
 import { useState } from "react";
 
 import type { CalculationResult } from "@/lib/calculator";
+import type { CardProfile } from "@/lib/cardData";
 import { formatCurrency } from "@/lib/cardData";
 
 interface ResultPanelProps {
   result: CalculationResult;
+  card?: CardProfile | null;
 }
 
-export function ResultPanel({ result }: ResultPanelProps) {
+function describeBankFees(card: CardProfile): string {
+  const parts: string[] = [];
+  if (card.fixed_foreign_atm_fee) {
+    parts.push(`${card.fixed_foreign_atm_fee} ${card.fixed_foreign_atm_fee_currency}`);
+  }
+  const pct = (card.percentage_foreign_atm_fee ?? 0) + (card.foreign_transaction_fee_pct ?? 0);
+  if (pct > 0) parts.push(`${(pct * 100).toFixed(2).replace(/\.?0+$/, "")}%`);
+  return parts.length ? parts.join(" + ") : "no withdrawal fee";
+}
+
+function formatVerified(date: string): string {
+  const d = new Date(date);
+  if (Number.isNaN(d.getTime())) return date;
+  return d.toLocaleDateString("en-GB", { month: "long", year: "numeric" });
+}
+
+export function ResultPanel({ result, card }: ResultPanelProps) {
   const [open, setOpen] = useState(false);
   const { currency, withoutConversion, withConversion, savingsHome, padKraPao } = result;
 
@@ -58,6 +76,43 @@ export function ResultPanel({ result }: ResultPanelProps) {
         {result.usingDefaultProfile && result.defaultProfileBasis ? (
           <span>Using {result.defaultProfileBasis}</span>
         ) : null}
+      </div>
+
+      <div className="mt-4 rounded-2xl border border-border bg-secondary/30 p-4">
+        <p className="text-sm text-foreground">
+          <span className="font-semibold">Your own bank's fees are included.</span>{" "}
+          {card ? (
+            <>
+              {card.bank_name} {card.product_name} charges {describeBankFees(card)} on foreign ATM
+              withdrawals, and that is already in the totals above.
+            </>
+          ) : (
+            <>
+              These totals use typical home-bank withdrawal and foreign transaction fees for{" "}
+              {currency}. Pick your card above for exact figures.
+            </>
+          )}
+        </p>
+        {card ? (
+          <p className="mt-2 text-xs text-muted-foreground">
+            Source:{" "}
+            <a
+              href={card.source_url}
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              className="text-primary underline-offset-4 hover:underline"
+            >
+              {card.source_label || card.bank_name}
+            </a>{" "}
+            · Last verified {formatVerified(card.last_verified_date)}
+          </p>
+        ) : null}
+        <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+          What we do not model yet: monthly free-withdrawal allowances (Wise, Revolut and some
+          digital banks give you a few free ATM withdrawals each month), premium plan tiers, and
+          short-term promotional fee waivers. If your card has one of those, your real cost may be
+          lower.
+        </p>
       </div>
 
       <button

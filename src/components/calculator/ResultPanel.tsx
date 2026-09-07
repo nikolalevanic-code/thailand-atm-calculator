@@ -19,6 +19,13 @@ function describeBankFees(card: CardProfile): string {
   return parts.length ? parts.join(" + ") : "no withdrawal fee";
 }
 
+function displayCardName(card: CardProfile): string {
+  const product = card.product_name.trim();
+  const bank = card.bank_name.trim();
+  if (product.toLowerCase().startsWith(bank.toLowerCase())) return product;
+  return `${bank} ${product}`;
+}
+
 function formatVerified(date: string): string {
   const d = new Date(date);
   if (Number.isNaN(d.getTime())) return date;
@@ -34,16 +41,19 @@ export function ResultPanel({ result, card }: ResultPanelProps) {
       aria-label="Withdrawal result"
       className="card-sheen relative overflow-hidden rounded-3xl border border-primary/30 bg-surface p-6 shadow-[0_24px_60px_-30px_rgba(157,123,234,0.9)] sm:p-8"
     >
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
-        Always choose "charge me in Thai baht"
+      <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary">
+        Always choose &quot;decline currency conversion&quot;!
       </p>
-      <p className="mt-4 text-sm text-muted-foreground">You save on this withdrawal</p>
+      <p className="mt-4 text-sm text-muted-foreground">
+        By choosing no, you&apos;ll save on this withdrawal...
+      </p>
       <p className="font-display text-5xl font-bold tabular-nums text-foreground sm:text-6xl">
         {formatCurrency(Math.abs(savingsHome), currency)}
       </p>
-       <p className="mt-2 text-sm text-muted-foreground">
-         That&apos;s {padKraPao} plates of pad kra pao&nbsp;just for hitting &quot;decline currency conversion&quot;!
-       </p>
+      <p className="mt-3 inline-flex items-center gap-2 rounded-full border border-destructive/40 bg-destructive/10 px-3 py-1.5 text-sm font-semibold text-destructive">
+        That&apos;s {padKraPao} plates of pad kra pao!{" "}
+        {Array.from({ length: Math.max(1, Math.floor(padKraPao / 5)) }, () => "🔥").join("")}
+      </p>
 
       <div className="mt-6 grid gap-3 sm:grid-cols-2">
         <div className="rounded-2xl border border-success/40 bg-success/10 p-4">
@@ -78,11 +88,9 @@ export function ResultPanel({ result, card }: ResultPanelProps) {
 
       <div className="mt-4 rounded-2xl border border-border bg-secondary/30 p-4">
         <p className="text-sm text-foreground">
-          <span className="font-semibold">Your own bank's fees are included.</span>{" "}
           {card ? (
             <>
-              {card.bank_name} {card.product_name} charges {describeBankFees(card)} on foreign ATM
-              withdrawals, and that is already in the totals above.
+              {displayCardName(card)} charges {describeBankFees(card)} on foreign ATM withdrawals.
             </>
           ) : (
             <>

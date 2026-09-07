@@ -41,11 +41,9 @@ export function ResultPanel({ result, card }: ResultPanelProps) {
       <p className="font-display text-5xl font-bold tabular-nums text-foreground sm:text-6xl">
         {formatCurrency(Math.abs(savingsHome), currency)}
       </p>
-      <p className="mt-2 text-sm text-muted-foreground">
-        That is about{" "}
-        <span className="font-semibold text-success">{padKraPao} plates of pad kra pao</span> — just
-        for tapping the right button on the ATM screen.
-      </p>
+       <p className="mt-2 text-sm text-muted-foreground">
+         That&apos;s {padKraPao} plates of pad kra pao&nbsp;just for hitting &quot;decline currency conversion&quot;!
+       </p>
 
       <div className="mt-6 grid gap-3 sm:grid-cols-2">
         <div className="rounded-2xl border border-success/40 bg-success/10 p-4">
